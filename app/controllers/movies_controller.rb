@@ -4,35 +4,48 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    @movies = Movie.all.order(:title)
   end
   def show
-    id = params[:id]
-    @movie = Movie.find(id)
+    begin
+      @movie = Movie.find params[:id]
+    rescue
+      redirect_to movies_path
+    end
   end
   def new
     @movie = Movie.new
   end
   def create
 
-    @movie = Movie.create!(movie_params)
-    redirect_to movies_path
-    flash[:notice] = "#{@movie.title} was successfully created."
+    @movie = Movie.create(movie_params)
+    if @movie.save
+      flash[:notice] = "#{@movie.title} was successfully created."
+      redirect_to movie_path(@movie)
+    else
+      render 'new'
+    end
   end
 
   def edit
-    @movie = Movie.find params[:id]
+    begin
+      @movie = Movie.find params[:id]
+    rescue
+      redirect_to movies_path
+    end
   end
 
   def update
     @movie = Movie.find params[:id]
-    @movie.update_attributes!(movie_params)
-    respond_to do |client_wants|
-      client_wants.html { redirect_to movie_path(@movie) }
-      client_wants.xml { render :xml => @movie.to_xml }
+    if @movie.update_attributes(movie_params)
+      flash[:notice] = "#{@movie.title} was successfully updated"
+      respond_to do |client_wants|
+        client_wants.html { redirect_to movie_path(@movie) }
+        client_wants.xml { render :xml => @movie.to_xml }
+      end
+    else
+      render 'edit'
     end
-    flash[:notice] = "#{@movie.title} was successfully updated"
-
   end
 
   def destroy

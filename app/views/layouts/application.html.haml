@@ -8,6 +8,9 @@
 
   %body
     #main
+      = render :partial => 'login'
+      .heading Rotten Potatoes
+
       - if flash[:notice]
         #notice.message= flash[:notice]
       -elsif flash[:warning]

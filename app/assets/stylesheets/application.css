@@ -78,3 +78,12 @@
    font-weight: bold;
    color: maroon;
  }
+ .heading {
+   font-size: 5em;
+   color: red;
+   padding: 20px 0;
+
+ }
+ tr:hover {
+   background-color: yellow;
+ }
