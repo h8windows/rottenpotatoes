@@ -1,18 +1,17 @@
-!!!5
+!!!
 %html
   %head
-    %title RottenPotatoes!
-    = stylesheet_link_tag 'application'
-    = javascript_include_tag 'application'
+    %title Rotten Potatoes!
+    = stylesheet_link_tag 'application', 'media' => 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
+    %h1.title Rotten Potatoes!
     #main
-      = render :partial => 'login'
-      .heading Rotten Potatoes
-
       - if flash[:notice]
         #notice.message= flash[:notice]
-      -elsif flash[:warning]
+      - elsif flash[:warning]
         #warning.message= flash[:warning]
+
       = yield

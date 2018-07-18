@@ -1,7 +1,0 @@
-%tr
-  %td= movie.title
-  %td= movie.rating
-  %td= movie.release_date.strftime("%B %d, %Y")
-  %td= link_to "More about #{movie.title}", movie_path(movie)
-  %td= link_to 'Edit movie', edit_movie_path(movie.id)
-  %td= link_to 'Delete movie', movie_path(movie.id), :method => :delete
