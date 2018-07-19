@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   resources :movies
   root :to => redirect('/movies')
 
-  get '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/failure' => 'movies#index'
-  map.logout 'logout', to: 'sessions#destroy'
+  get '/auth/:provider/callback' => 'sessions#create'
+  post 'logout' => 'sessions#destroy'
+  get '/auth/failure' => 'sessions#failure'
+  get '/auth/twitter', :as => 'login'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
