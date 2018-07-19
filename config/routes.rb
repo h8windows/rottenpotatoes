@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root :to => redirect('/movies')
 
   get '/auth/:provider/callback', to: 'sessions#create'
-  get '/auth/failure', to: '/movies'
+  get '/auth/failure' => 'movies#index'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
