@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :movies
   root :to => redirect('/movies')
 
+  get '/auth/:provider/callback', to: 'sessions#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
