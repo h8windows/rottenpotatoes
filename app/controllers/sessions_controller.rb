@@ -13,4 +13,8 @@ class SessionsController < ApplicationController
     flash[:notice] = 'Logged out successfully.'
     redirect_to movies_path
   end
+  def failure
+    flash[:notice] = 'You\'ll need to log in to add or edit movies'
+    redirect_to movies_path
+  end
 end
